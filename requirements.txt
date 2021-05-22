@@ -1,0 +1,6 @@
+BeautifulSoup4
+imgurpython
+pyyaml
+PySide2
+appdirs
+psutil

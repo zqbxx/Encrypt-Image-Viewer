@@ -8,9 +8,11 @@ w - save image to a wallpaper folder
 
 from time import sleep
 
-from PyQt5.QtWidgets import QApplication
+
 from pathlib import Path
 from typing import List
+
+from PySide2.QtWidgets import QApplication
 
 from jive import config as cfg
 from jive.imageproperty import ImageProperty

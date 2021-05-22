@@ -1,8 +1,10 @@
 import yaml
-from PyQt5.QtWidgets import QAction, QMenu
+
 from functools import partial
 from typing import Dict, List, KeysView, Union
 import random
+
+from PySide2.QtWidgets import QMenu, QAction
 
 from jive import config as cfg
 

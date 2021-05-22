@@ -1,6 +1,7 @@
 import random
-from PyQt5.QtWidgets import (QMessageBox)
 from typing import Optional, List
+
+from PySide2.QtWidgets import QMessageBox
 
 from jive import config as cfg
 from jive.extractors import subreddit

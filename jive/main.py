@@ -5,6 +5,13 @@ This is the main file.
 """
 
 # check compatibility
+from PySide2 import QtGui
+from PySide2.QtCore import QPoint
+from PySide2.QtGui import Qt, QKeySequence, QCursor
+from PySide2.QtMultimedia import QSound
+from PySide2.QtWidgets import QMainWindow, QScrollArea, QFrame, QLabel, QVBoxLayout, QDesktopWidget, QInputDialog, \
+    QLineEdit, QAction, QMenu, QFileDialog, QShortcut, QMessageBox, QApplication
+
 try:
     import sys
     assert sys.version_info.major == 3
@@ -29,18 +36,14 @@ if __name__ == "__main__":
 import sys
 
 import os
-from PyQt5 import QtGui
-from PyQt5 import sip
-from PyQt5.QtCore import QPoint, Qt
-from PyQt5.QtGui import QCursor, QKeySequence
-from PyQt5.QtMultimedia import QSound
-from PyQt5.QtWidgets import (QAction, QApplication, QDesktopWidget,
-                             QFileDialog, QFrame, QInputDialog, QLabel,
-                             QLineEdit, QMainWindow, QMenu, QMessageBox,
-                             QScrollArea, QShortcut, QVBoxLayout, qApp)
+
 from functools import partial
 from pathlib import Path
 from typing import Tuple, Union, List, Optional
+
+
+os.environ['QT_API'] = 'PySide2'
+import qtawesome as qta
 
 from jive import autodetect
 from jive import bookmarks
@@ -69,6 +72,8 @@ from jive.important import ImportantFilesAndFolders
 from jive.simplescrape import SimpleScrape
 from jive.urlfolding import UrlFolding
 
+from jive.encrypt.menu import add_encrypt_menu
+
 log = cfg.log
 
 ON, OFF = True, False
@@ -76,7 +81,8 @@ ON, OFF = True, False
 # Leave it here! This way we force pyinstaller to include PyQt5.sip.so
 # in the EXE. Without that file the EXE fails to start and for some reason
 # it was not added automatically.
-sip_version: int = sip.SIP_VERSION
+# TODO
+# sip_version: int = sip.SIP_VERSION
 
 # TEST_IMG = "pinup.jpg"
 # TEST_IMG = "girl.jpg"
@@ -377,7 +383,8 @@ class MainWindow(QMainWindow):
         # self.resize(self.width, self.height)
 
         self.setWindowTitle(self.title)
-        self.setWindowIcon(QtGui.QIcon(cfg.ICON))
+        #self.setWindowIcon(QtGui.QIcon(cfg.ICON))
+        self.setWindowIcon(qta.icon(cfg.ICON, color='#2c3e50'))
 
         self.img_view = ImageView(self)
         # self.central_widget.setStyleSheet("background-color: black")
@@ -647,7 +654,7 @@ class MainWindow(QMainWindow):
         self.about_act.triggered.connect(partial(help_dialogs.open_about, self))
         #
         self.about_qt_act = QAction("About &Qt", self)
-        self.about_qt_act.triggered.connect(qApp.aboutQt)
+        #self.about_qt_act.triggered.connect(qApp.aboutQt)
         #
         key = "Ctrl+Alt+R"
         self.reset_act = QAction("Reset", self)
@@ -722,6 +729,7 @@ class MainWindow(QMainWindow):
         toolsMenu = self.menubar.addMenu("&Tools")
         if self.show_bookmarks:
             bookmarksMenu = self.menubar.addMenu("&Bookmarks")
+        add_encrypt_menu(self.menubar, self)
         helpMenu = self.menubar.addMenu("&Help")
 
         # fileMenu
@@ -729,14 +737,14 @@ class MainWindow(QMainWindow):
         fileMenu.addAction(self.open_dir_act)
         open_url_menu = QMenu(self.menubar)
         open_url_menu.setTitle("Open &URL")
-        fileMenu.addMenu(open_url_menu)
+        #fileMenu.addMenu(open_url_menu)
         for entry in open_url_acts:
             if isinstance(entry, str):
                 open_url_menu.addSeparator()
             else:
                 open_url_menu.addAction(entry)
         fileMenu.addAction(self.open_custom_url_list_act)
-        fileMenu.addAction(self.open_random_subreddit_act)
+        #fileMenu.addAction(self.open_random_subreddit_act)
         fileMenu.addSeparator()
         fileMenu.addAction(self.save_image_act)
         fileMenu.addAction(self.save_image_list_act)
@@ -804,7 +812,7 @@ class MainWindow(QMainWindow):
         open_url_menu = QMenu(self.menu)
         open_url_menu.setTitle("Open &URL...")
         self.menu.addMenu(open_url_menu)
-        self.menu.addAction(self.open_random_subreddit_act)
+
         for entry in open_url_acts:
             if isinstance(entry, str):
                 open_url_menu.addSeparator()
@@ -812,6 +820,7 @@ class MainWindow(QMainWindow):
                 open_url_menu.addAction(entry)
         # self.menu.addAction(self.open_url_act)
         if self.show_subreddits:
+            self.menu.addAction(self.open_random_subreddit_act)
             open_subreddit_categories = QMenu(self.menu)
             open_subreddit_categories.setTitle("Select subreddit...")
             self.menu.addMenu(open_subreddit_categories)
@@ -1739,7 +1748,7 @@ def main(argv) -> None:
     App = QApplication(argv)
     window = MainWindow(argv)
     window.show()
-    sys.exit(App.exec())
+    sys.exit(App.exec_())
 
 ##############################################################################
 

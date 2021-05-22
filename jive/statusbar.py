@@ -1,5 +1,5 @@
-from PyQt5.QtCore import QTimer
-from PyQt5.QtWidgets import QHBoxLayout, QLabel, QWidget, QProgressBar
+from PySide2.QtCore import QTimer
+from PySide2.QtWidgets import QHBoxLayout, QLabel, QWidget, QProgressBar
 
 from jive import config as cfg
 

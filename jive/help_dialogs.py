@@ -1,5 +1,6 @@
 import webbrowser
-from PyQt5.QtWidgets import QMessageBox
+
+from PySide2.QtWidgets import QMessageBox
 
 from jive import config as cfg
 

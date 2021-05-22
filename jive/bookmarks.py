@@ -1,9 +1,11 @@
 import re
 import yaml
-from PyQt5.QtWidgets import QAction, QMenu
+
 from functools import partial
 from typing import Dict, List, KeysView, Union, Optional
 from typing import Tuple
+
+from PySide2.QtWidgets import QMenu, QAction
 
 from jive import config as cfg
 

@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QFrame, QGraphicsView
+from PySide2.QtGui import Qt
+from PySide2.QtWidgets import QGraphicsView, QFrame
 
 
 class ImageView(QGraphicsView):

@@ -1,9 +1,10 @@
-from PyQt5 import QtCore, QtGui
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import (QApplication, QDialog, QGridLayout, QGroupBox,
-                             QLabel, QPushButton, QShortcut, QVBoxLayout)
+
 from functools import partial
 from pathlib import Path
+
+from PySide2.QtGui import QKeySequence
+from PySide2.QtWidgets import QDialog, QVBoxLayout, QGroupBox, QGridLayout, QLabel, QPushButton, QApplication, QShortcut
+from PySide2 import QtGui, QtCore
 
 from jive import config as cfg
 from jive import helper

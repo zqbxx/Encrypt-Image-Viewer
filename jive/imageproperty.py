@@ -1,9 +1,10 @@
 import os
 import requests
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPixmap
 from pathlib import Path
 from typing import Tuple, Optional, Union
+
+from PySide2.QtCore import QSize
+from PySide2.QtGui import QPixmap, Qt
 
 from jive import config as cfg
 from jive import fileops
@@ -12,6 +13,8 @@ from jive.cache import Cache
 from jive.exceptions import ImageError, FileNotSaved
 from jive.helper import lightblue, red, yellow
 from jive.imagewithextra import ImageWithExtraInfo
+
+from jive.encrypt.image import load_encrypt_image
 
 log = cfg.log
 
@@ -47,8 +50,10 @@ class ImageProperty:
             pm = None
             file_size = -1
             if os.path.isfile(name):
-                pm = QPixmap(name)
-                file_size = os.path.getsize(name)
+                #pm = QPixmap(name)
+                #file_size = os.path.getsize(name)
+
+                pm, file_size = load_encrypt_image(name)
             else:
                 if name.startswith(("http://", "https://")):
                     url = name
@@ -133,10 +138,10 @@ class ImageProperty:
 
     def calculate_zoomed_image(self) -> QPixmap:
         if self.original_img:
-            self.zoomed_img = self.original_img.scaled(self.zoom_ratio * self.original_img.width(),
-                                                       self.zoom_ratio * self.original_img.height(),
-                                                       Qt.KeepAspectRatio,
-                                                       Qt.SmoothTransformation)
+            self.zoomed_img = self.original_img.scaled(
+                QSize(self.zoom_ratio * self.original_img.width(), self.zoom_ratio * self.original_img.height()),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation)
         return self.zoomed_img
 
     def set_zoomed_img(self, pm: QPixmap) -> None:

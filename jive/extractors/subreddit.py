@@ -1,8 +1,10 @@
 import re
 import requests
-from PyQt5.QtWidgets import QApplication
+
 from pathlib import Path
 from typing import Optional, List
+
+from PySide2.QtWidgets import QApplication
 
 from jive import config as cfg
 from jive.extractors import imgur, tumblr
