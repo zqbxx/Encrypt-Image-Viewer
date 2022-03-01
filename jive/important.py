@@ -5,9 +5,9 @@ Information about the important files and folders.
 from functools import partial
 from pathlib import Path
 
-from PySide2 import QtGui
-from PySide2.QtGui import QKeySequence
-from PySide2.QtWidgets import QDialog, QVBoxLayout, QGroupBox, QGridLayout, QLabel, QPushButton, QApplication, QShortcut
+from PySide6 import QtGui
+from PySide6.QtGui import QKeySequence, QShortcut
+from PySide6.QtWidgets import QDialog, QVBoxLayout, QGroupBox, QGridLayout, QLabel, QPushButton, QApplication
 
 from jive import config as cfg
 from jive import opener

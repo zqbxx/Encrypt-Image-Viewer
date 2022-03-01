@@ -4,7 +4,7 @@ import requests
 from pathlib import Path
 from typing import Optional, List
 
-from PySide2.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication
 
 from jive import config as cfg
 from jive.extractors import imgur, tumblr

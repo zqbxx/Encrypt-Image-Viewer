@@ -3,8 +3,8 @@ import hashlib
 import os
 import psutil
 import requests
-from PySide2.QtGui import QClipboard
-from PySide2.QtWidgets import QApplication
+from PySide6.QtGui import QClipboard
+from PySide6.QtWidgets import QApplication
 
 from bs4 import BeautifulSoup
 from pathlib import Path

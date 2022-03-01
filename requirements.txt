@@ -1,6 +1,7 @@
 BeautifulSoup4
 imgurpython
 pyyaml
-PySide2
+PySide6
 appdirs
 psutil
+requests

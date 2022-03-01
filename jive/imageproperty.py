@@ -3,8 +3,8 @@ import requests
 from pathlib import Path
 from typing import Tuple, Optional, Union
 
-from PySide2.QtCore import QSize
-from PySide2.QtGui import QPixmap, Qt
+from PySide6.QtCore import QSize
+from PySide6.QtGui import QPixmap, Qt
 
 from jive import config as cfg
 from jive import fileops

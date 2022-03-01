@@ -6,7 +6,7 @@ import sys
 import webbrowser
 from subprocess import DEVNULL, Popen
 
-from PySide2.QtWidgets import QMessageBox
+from PySide6.QtWidgets import QMessageBox
 
 from jive import config as cfg
 from jive.exceptions import MissingPreferencesEntry

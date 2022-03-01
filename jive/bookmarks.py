@@ -5,7 +5,8 @@ from functools import partial
 from typing import Dict, List, KeysView, Union, Optional
 from typing import Tuple
 
-from PySide2.QtWidgets import QMenu, QAction
+from PySide6.QtGui import QAction
+from PySide6.QtWidgets import QMenu
 
 from jive import config as cfg
 

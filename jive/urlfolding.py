@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from PySide2.QtCore import Signal
-from PySide2.QtWidgets import QDialog
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QDialog
 
 from jive import helper
 from jive import showFolding

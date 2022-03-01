@@ -5,12 +5,12 @@ This is the main file.
 """
 
 # check compatibility
-from PySide2 import QtGui
-from PySide2.QtCore import QPoint
-from PySide2.QtGui import Qt, QKeySequence, QCursor
-from PySide2.QtMultimedia import QSound
-from PySide2.QtWidgets import QMainWindow, QScrollArea, QFrame, QLabel, QVBoxLayout, QDesktopWidget, QInputDialog, \
-    QLineEdit, QAction, QMenu, QFileDialog, QShortcut, QMessageBox, QApplication
+from PySide6 import QtGui
+from PySide6.QtCore import QPoint, QUrl
+from PySide6.QtGui import Qt, QKeySequence, QCursor, QAction, QShortcut
+from PySide6.QtMultimedia import QSoundEffect
+from PySide6.QtWidgets import QMainWindow, QScrollArea, QFrame, QLabel, QVBoxLayout, QInputDialog, \
+    QLineEdit, QMenu, QFileDialog, QMessageBox, QApplication, QWidget
 
 try:
     import sys
@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Tuple, Union, List, Optional
 
 
-os.environ['QT_API'] = 'PySide2'
+os.environ['QT_API'] = 'PySide6'
 import qtawesome as qta
 
 from jive import autodetect
@@ -154,7 +154,9 @@ class MainWindow(QMainWindow):
 
         self.use_audio = True if cfg.PREFERENCES_OPTIONS.get("use_audio", "") == "yes" else False
         if self.use_audio:
-            self.error_sound = QSound(cfg.ERROR_SOUND, self)
+            #self.error_sound = QSoundEffect(cfg.ERROR_SOUND, self)
+            self.error_sound = QSoundEffect()
+            self.error_sound.setSource(QUrl.fromLocalFile(cfg.ERROR_SOUND))
 
         self.auto_load_next_subreddit_page = \
             True if cfg.PREFERENCES_OPTIONS.get("auto_load_next_subreddit_page", "") == "yes" else False
@@ -469,7 +471,8 @@ class MainWindow(QMainWindow):
         qr = self.frameGeometry()
 
         # center point of screen
-        cp = QDesktopWidget().availableGeometry().center()
+        #cp = QDesktopWidget().availableGeometry().center()
+        cp = QWidget.screen().availableGeometry().center()
 
         # move rectangle's center point to screen's center point
         qr.moveCenter(cp)
@@ -858,7 +861,7 @@ class MainWindow(QMainWindow):
         options |= QFileDialog.DontUseNativeDialog
         folder = QFileDialog.getExistingDirectory(self,
                                                   caption="Open Image Directory",
-                                                  directory=self.settings.get_last_dir_opened(),
+                                                  dir=self.settings.get_last_dir_opened(),
                                                   options=options)
         if os.path.isdir(folder):
             self.open_local_dir(folder)
@@ -871,9 +874,8 @@ class MainWindow(QMainWindow):
         filter = "Images (*.bmp *.jpg *.jpe *.jpeg *.png *.pbm *.pgm *.ppm *.xbm *.xpm)"
         file_obj = QFileDialog.getOpenFileName(self,
                                                caption="Open Image File",
-                                               directory=str(Path(self.settings.get_last_file_opened()).parent),
+                                               dir=str(Path(self.settings.get_last_file_opened()).parent),
                                                filter=filter,
-                                               initialFilter=filter,
                                                options=options)
         fname = file_obj[0]
         if os.path.isfile(fname):

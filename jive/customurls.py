@@ -1,8 +1,8 @@
 import os
 
-from PySide2 import QtGui
-from PySide2.QtCore import Signal
-from PySide2.QtWidgets import QDialog, QFileDialog
+from PySide6 import QtGui
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import QDialog, QFileDialog
 
 from jive import helper
 from jive import showUrlList

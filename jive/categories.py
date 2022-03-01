@@ -4,7 +4,8 @@ from functools import partial
 from typing import Dict, List, KeysView, Union
 import random
 
-from PySide2.QtWidgets import QMenu, QAction
+from PySide6.QtGui import QAction
+from PySide6.QtWidgets import QMenu
 
 from jive import config as cfg
 

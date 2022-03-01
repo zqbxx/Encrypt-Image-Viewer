@@ -1,9 +1,9 @@
-from PySide2 import QtGui
-from PySide2.QtCore import Qt
-from PySide2.QtCore import Signal
-from PySide2.QtGui import QKeySequence
-from PySide2.QtWidgets import (QApplication, QShortcut)
-from PySide2.QtWidgets import QDialog
+from PySide6 import QtGui
+from PySide6.QtCore import Qt
+from PySide6.QtCore import Signal
+from PySide6.QtGui import QKeySequence, QShortcut
+from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QDialog
 from functools import partial
 
 from jive import helper
